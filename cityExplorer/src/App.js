@@ -16,7 +16,7 @@ function App() {
   }
 
   const button = async () => {
-    const apiKey = await axios.get(`GET https://us1.locationiq.com/v1/search?key=${process.env.
+    const apiKey = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.
     REACT_APP_LOCATION_API_KEY}&q=${inputCity}&format=json`)
       .then(async function(response){
         setDisplayCityInfo(response.data[0])
