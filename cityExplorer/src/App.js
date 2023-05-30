@@ -6,13 +6,23 @@ import { Card } from 'react-bootstrap';
 import axios from 'axios';
 import { useState } from 'react';
 import Weather from './comp/weather';
+import Movie from './comp/Movie'
 
 function App() {
+
   const [displayCityInfo, setDisplayCityInfo] = useState("");
   const [inputCity, setInputCity] = useState("");
   const [error, setError] = useState(null);
-  const [catchError, setCatchError] = useState(null);
+
   const [weatherData, setWeatherData] = useState([]);
+  const [catchError, setCatchError] = useState(null);
+
+  const [movieData, setMovieData] = useState([]);
+  const [show, setShow] = useState(false);
+  const [movieError, setMovieError] = useState('');
+
+
+  
   const mapData = `https://maps.locationiq.com/v3/staticmap?key=${process.env.
     REACT_APP_LOCATION_API_KEY}&center=${displayCityInfo.lat},${displayCityInfo.lon}&zoom=13`
 
@@ -31,16 +41,24 @@ function App() {
       })
 
     const weatherResponse = axios.get(`http://localhost:3000/weatherData?searchQuery=${inputCity}`)
+
     weatherResponse.then(function (res) {
-      console.log(res.data)
+      // console.log(res.data)
       setWeatherData(res.data)
       setCatchError(null);
     }).catch(function (catchError) {
       console.log(catchError.message)
       setCatchError(catchError.message)
     })
+
+    let movieResponse = axios.get(`http://localhost:3000/movie?searchQuery=${inputCity}`)
+    movieResponse.then(function(response){
+      setMovieData(response.data)
+    })
     return apiKey
   }
+
+
 
   let mapElement = displayCityInfo ? <img src={mapData} alt="mapImage" /> : <></>
 
@@ -58,6 +76,7 @@ function App() {
         <p style={{ color: 'white' }}> {error}</p>
       </header>
       <Weather weatherData={weatherData} />
+      <Movie movieData={movieData} />
       {catchError}
     </div>
   );
