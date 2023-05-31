@@ -6,7 +6,7 @@ import { Card } from 'react-bootstrap';
 import axios from 'axios';
 import { useState } from 'react';
 import Weather from './comp/weather';
-import Movie from './comp/Movie'
+import Movies from './comp/Movies'
 
 function App() {
 
@@ -76,7 +76,7 @@ function App() {
         <p style={{ color: 'white' }}> {error}</p>
       </header>
       <Weather weatherData={weatherData} />
-      <Movie movieData={movieData} />
+      <Movies movieData={movieData} />
       {catchError}
     </div>
   );
