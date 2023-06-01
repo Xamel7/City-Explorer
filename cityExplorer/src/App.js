@@ -40,7 +40,7 @@ function App() {
         setError(error.message)
       })
 
-    const weatherResponse = axios.get(`http://localhost:3000/weatherData?searchQuery=${inputCity}`)
+    const weatherResponse = axios.get(`https://city-explorer-api-a4iy.onrender.com/weatherData?searchQuery=${inputCity}`)
 
     weatherResponse.then(function (res) {
       // console.log(res.data)
@@ -51,7 +51,7 @@ function App() {
       setCatchError(catchError.message)
     })
 
-    let movieResponse = axios.get(`http://localhost:3000/movie?searchQuery=${inputCity}`)
+    let movieResponse = axios.get(`https://city-explorer-api-a4iy.onrender.com/movie?searchQuery=${inputCity}`)
     movieResponse.then(function(response){
       setMovieData(response.data)
     })
